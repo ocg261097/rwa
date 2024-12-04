@@ -1,7 +1,7 @@
 id=OCG-rwa
 name=OCG Restore Whatsapp
-version=0.1.1
-versionCode=1.1
+version=0.1.2
+versionCode=1.2
 author=Herlan
 description=OCG Restore Whatsapp
 updateJson=https://raw.githubusercontent.com/ocg261097/rwa/refs/heads/master/update.json
