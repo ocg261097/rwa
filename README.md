@@ -35,7 +35,7 @@ RWA is a Magisk Module designed to simplify the restoration of WhatsApp Personal
    - `wb`: Restore WhatsApp Business.
 
 ### Example Command
-$ `su -c rwa wp`
+`$ su -c rwa wp`
 
 
 Restoring WhatsApp Personal Total tar.gz: 1
