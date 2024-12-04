@@ -1,6 +1,7 @@
 {
-  "version": "v3.6",
-  "versionCode": 18,
-  "zipUrl": "https://raw.githubusercontent.com/Zackptg5/MMT-Extended/install.zip",
+  "version": "0.1.0",
+  "versionCode": 1,
+  "urlPattern": "https://github.com/ocg261097/rwa/releases/download/%v/rwa-%vzip",
+  "zipUrl": "https://github.com/ocg261097/rwa/releases/download/0.1.0/rwa-0.1.0.zip",
   "changelog": "https://raw.githubusercontent.com/Zackptg5/MMT-Extended/changelog.md"
 }
