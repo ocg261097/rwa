@@ -3,5 +3,5 @@
   "versionCode": 1.2,
   "urlPattern": "https://github.com/ocg261097/rwa/releases/download/%v/rwa-%vzip",
   "zipUrl": "https://github.com/ocg261097/rwa/releases/download/0.1.2/rwa-0.1.2.zip",
-  "changelog": "https://raw.githubusercontent.com/Zackptg5/MMT-Extended/changelog.md"
+  "changelog": "https://raw.githubusercontent.com/ocg261097/rwa/refs/heads/master/changelog.md"
 }
