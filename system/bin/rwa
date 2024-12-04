@@ -1,0 +1,95 @@
+#!/system/bin/sh
+G='\e[01;32m'    # GREEN
+R='\e[01;31m'    # RED
+C='\e[01;36m'    # CYAN
+N='\e[00;37;40m' # NEUTRAL
+
+clear
+echo -e "${C}============ O C G  H E R L A N ============${C}"
+echo -e "${C}          RESTORE WP/WB TAR.GZ${C}"
+echo -e "${C}          POWERED BY OCG        ${C}"
+echo -e "${C}===========================================${C}"
+
+ei(){
+    echo -e "${G} >> $1 ${N}"
+}
+ee(){
+    echo -e "${R} >> $1 ${N}"
+}
+
+# Validate input arguments
+if [[ "$1" == "wp" ]]; then
+    whatspackage="com.whatsapp"
+    ei "Restoring WhatsApp Personal"
+elif [[ "$1" == "wb" ]]; then
+    whatspackage="com.whatsapp.w4b"
+    ei "Restoring WhatsApp Business"
+else
+    ee "Usage: $0 [wp|wb]"
+    ee "  wp: Restore WhatsApp Personal"
+    ee "  wb: Restore WhatsApp Business"
+    exit 1
+fi
+
+# Define paths
+folback="/sdcard/OCG/restore/$whatspackage/"
+mkdir -p $folback 2> /dev/null
+
+ee "Mendeteksi jumlah file tar.gz"
+if [[ $(ls $folback | wc -l ) -gt 0 ]]; then
+    ei "Total tar.gz : $(ls $folback | wc -l)"
+    sleep 1
+
+    ei "Membuka WhatsApp"
+    pm clear $whatspackage
+    am start -n $whatspackage/.Main > /dev/null
+    sleep 1
+    am force-stop $whatspackage
+
+    ei "Memproses data"
+    mkdir -p /sdcard/OCG/sampah/$whatspackage 2> /dev/null
+
+    for file in $(ls $folback*.tar.gz -tr1q | tail -n1); do
+        ei "Nama File : $file"
+
+        tar -xzf $file -C $folback
+        # Define possible source directories
+        data_dir_legacy="$folback/data/data/$whatspackage"
+        data_dir_user="$folback/data/user/0/$whatspackage"
+
+        # Check which directory exists and set the source path
+        if [ -d "$data_dir_legacy" ]; then
+            source_dir="$data_dir_legacy"
+        elif [ -d "$data_dir_user" ]; then
+            source_dir="$data_dir_user"
+        else
+            ee "Backup data not found in expected directories."
+            exit 1
+        fi
+
+        # Copy shared_prefs and other files
+        cp -a "$source_dir/shared_prefs/keystore.xml" /data/user/0/$whatspackage/shared_prefs/ 2> /dev/null
+        cp -a "$source_dir/shared_prefs/com.whatsapp_preferences_light.xml" /data/user/0/$whatspackage/shared_prefs/ 2> /dev/null
+        cp -a "$source_dir/files/"* /data/user/0/$whatspackage/files 2> /dev/null
+
+   #     mv $folback/data/data/$whatspackage/databases /data/user/0/$whatspackage 2> /dev/null
+    #    rm -rf $folback/data 2> /dev/null
+
+        echo "$whatspackage\n" > /storage/emulated/0/restoredone
+        echo "$file\n" >> /storage/emulated/0/restoredone
+        mv $file /sdcard/OCG/sampah/$whatspackage/
+
+        datano=$(cat "/data/user/0/$whatspackage/shared_prefs/${whatspackage}_preferences_light.xml" 2> /dev/null) 
+        nomor=$(sed -n -e 's/.*<string name="registration_jid">\(.*\)<\/string>.*/\1/p' <<< $datano)
+        am broadcast -a clipper.set -e text "$nomor" > /dev/null
+        am force-stop $whatspackage
+        ee "Nomor disalin : $nomor"
+        sleep 0.5
+        am start -n $whatspackage/.Main > /dev/null
+    done
+else
+    ei "Tar.gz tidak ditemukan"
+fi
+
+am force-stop os.tools.scriptmanager 2> /dev/null
+am force-stop jackpal.androidterm  2> /dev/null
