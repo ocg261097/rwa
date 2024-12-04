@@ -1,40 +1,59 @@
-<h1 align="center">Magisk Module Template Extended (MMT-Ex)</h1>
+# RWA - Restore WhatsApp (Magisk Module)
 
-<div align="center">
-  <!-- Version -->
-    <img src="https://img.shields.io/badge/Version-v3.7-blue.svg?longCache=true&style=popout-square"
-      alt="Version" />
-  <!-- Last Updated -->
-    <img src="https://img.shields.io/badge/Updated-April 24, 2024-green.svg?longCache=true&style=flat-square"
-      alt="_time_stamp_" />
-  <!-- Min Magisk -->
-    <img src="https://img.shields.io/badge/MinMagisk-20.4-red.svg?longCache=true&style=flat-square"
-      alt="_time_stamp_" />
-  <!-- Min KSU -->
-    <img src="https://img.shields.io/badge/MinKernelSU-0.6.6-red.svg?longCache=true&style=flat-square"
-      alt="_time_stamp_" /></div>
+RWA is a Magisk Module designed to simplify the restoration of WhatsApp Personal or WhatsApp Business data from `.tar.gz` backup files. With this module, you can quickly restore important files and settings, making the process seamless for rooted devices.
 
-<div align="center">
-  <strong>MMT Extended is the spiritual successor of Unity and makes magisk module creation easy. Instructions in the 
-    <h3><a href="https://github.com/Zackptg5/MMT-Extended/wiki">Wiki</a></h3><h4>Also supports KSU</h4>
-</div>
+## Features
+- Restore WhatsApp Personal (`com.whatsapp`) or WhatsApp Business (`com.whatsapp.w4b`) backups.
+- Automatically detects and processes the latest `.tar.gz` backup file.
+- Restores:
+  - `keystore.xml`
+  - Shared preferences (`com.whatsapp_preferences_light.xml`)
+  - Files in the `/files` directory.
+- Copies the registered phone number to the clipboard.
+- Logs restoration progress for easy debugging.
 
-<div align="center">
-  <h3>
-    <a href="https://github.com/Zackptg5/MMT-Extended">
-      Source Code
-    </a>
-    <span> | </span>
-    <a href="https://github.com/Zackptg5/MMT-Extended-Addons">
-      Addons Repository
-    </a>
-    <span> | </span>
-    <a href="https://forum.xda-developers.com/apps/magisk/magisk-module-template-extended-mmt-ex-t4029819">
-      XDA
-    </a>
-  </h3>
-</div>
+## Requirements
+- Root access via [Magisk](https://magisk.me/).
+- A device running Android.
+- Backup files stored in one of the following directories:
+  - `/sdcard/OCG/restore/com.whatsapp/` (for WhatsApp Personal).
+  - `/sdcard/OCG/restore/com.whatsapp.w4b/` (for WhatsApp Business).
 
-### Usage
-- [Follow the directions here (DO NOT FORK)](https://help.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
-- Then follow instructions in [Wiki](https://github.com/Zackptg5/MMT-Extended/wiki)
+## Installation
+1. Download and install [Magisk](https://github.com/topjohnwu/Magisk).
+2. Download rwa module.
+3. Flash the `rwa.zip` file in Magisk Manager:
+4. Open Magisk Manager.
+5. Go to Modules > Install from Storage.
+6. Select the `rwa.zip` file and reboot.
+
+## Usage
+1. Open a terminal emulator (e.g., Termux) on your device.
+2. Switch to superuser mode: su
+3. Run the `rwa` command followed by the desired mode:
+   - `wp`: Restore WhatsApp Personal.
+   - `wb`: Restore WhatsApp Business.
+
+### Example Command
+$ su -c rwa wp
+Restoring WhatsApp Personal Total tar.gz: 1 Nama File: backup_2023.tar.gz Nomor disalin: 6281234567890
+
+## Troubleshooting
+- Ensure backup files are in the correct directory:
+  - `/sdcard/OCG/restore/com.whatsapp/`
+  - `/sdcard/OCG/restore/com.whatsapp.w4b/`
+- Verify required commands (`tar`, `am`, `pm`) are available on your device.
+- Check logs for error messages.
+
+## Contributing
+Contributions, suggestions, and bug reports are welcome! Feel free to submit an issue or pull request.
+
+## License
+This project is licensed under the [MIT License](LICENSE).
+
+---
+
+**Powered by OCG**  
+[GitHub Repository](https://github.com/ocg261097/rwa/)
+
+
