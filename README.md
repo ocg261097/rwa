@@ -38,7 +38,11 @@ RWA is a Magisk Module designed to simplify the restoration of WhatsApp Personal
 $ `su -c rwa wp`
 
 
-Restoring WhatsApp Personal Total tar.gz: 1 Nama File: backup_2023.tar.gz Nomor disalin: 6281234567890
+Restoring WhatsApp Personal Total tar.gz: 1
+
+Nama File: backup_2023.tar.gz 
+
+Nomor disalin: 6281234567890
 
 ## Troubleshooting
 - Ensure backup files are in the correct directory:
