@@ -1,2 +1,5 @@
-### v1.0 - 1.4.2020
+### v1.1 - 0.1.1
+* Improve perfomance
+
+### v1.0 - 0.1.0
 * Initial release
